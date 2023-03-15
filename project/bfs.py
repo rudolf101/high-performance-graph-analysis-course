@@ -1,6 +1,7 @@
 from typing import List
 
 from pygraphblas import Vector, Matrix, INT64, BOOL
+from pygraphblas.descriptor import RSC
 
 
 def bfs(graph: Matrix, source: int) -> List[int]:
@@ -19,20 +20,15 @@ def bfs(graph: Matrix, source: int) -> List[int]:
         list with distance(or -1 if no path) from source to another vertexes
     """
     size = graph.nrows
-    visited = Vector.sparse(BOOL, size)
     front = Vector.sparse(BOOL, size)
     front[source] = True
 
-    ans = Vector.dense(INT64, size, fill=-1)
+    ans = Vector.sparse(INT64, size)
     curr_depth = 0
-    previous = None
 
-    while previous != visited.nvals:
-        previous = visited.nvals
+    while front.nvals:
         ans.assign_scalar(value=curr_depth, mask=front)
-        visited |= front
-        front = front.vxm(graph)
-        front.assign_scalar(value=False, mask=visited)
+        front.vxm(graph, out=front, mask=ans, desc=RSC)
         curr_depth += 1
 
-    return list(ans.vals)
+    return list(ans.get(i, default=-1) for i in range(size))
