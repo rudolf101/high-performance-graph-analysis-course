@@ -1,24 +1,19 @@
-import pytest
-from project.bfs import *
-from pygraphblas import Matrix
+import pathlib
+
+from project.bfs import bfs
+from tests.utils import load_test_data_json
+
+test_bfs_path = pathlib.Path(__file__).parent / "resources" / "test_bfs.json"
+
+tests = load_test_data_json(test_bfs_path)
 
 
-@pytest.mark.parametrize(
-    "u, v, source, ans",
-    [
-        (
-            [0, 1, 2, 3, 3, 4, 4, 4, 4, 5, 6, 7, 7, 8],
-            [1, 2, 3, 3, 4, 5, 6, 6, 7, 7, 7, 7, 8, 8],
-            1,
-            [-1, 0, 1, 2, 3, 4, 4, 4, 5],
-        ),
-        (
-            [0, 1, 2, 3, 4, 5],
-            [1, 2, 3, 4, 5, 0],
-            2,
-            [4, 5, 0, 1, 2, 3],
-        ),
-    ],
-)
-def test_bfs(u, v, source, ans):
-    assert bfs(Matrix.from_lists(u, v, True, typ=BOOL), source) == ans
+# TODO: Make it parametrized
+def test_bfs0():
+    matrix, source, ans = tests[0]
+    assert bfs(matrix, source) == ans
+
+
+def test_bfs1():
+    matrix, source, ans = tests[1]
+    assert bfs(matrix, source) == ans
