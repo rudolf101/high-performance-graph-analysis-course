@@ -5,7 +5,9 @@ from typing import List, Tuple, Union
 from pygraphblas import Matrix, BOOL
 
 
-def load_test_data_json(path: Path) -> List[Tuple[Matrix, int, List[int]]]:
+def load_test_data_json(
+    path: Path,
+) -> List[Tuple[Matrix, Union[int, List[int]], List[int]]]:
     matrix, source, ans = [], [], []
 
     with open(path, "r") as file:
