@@ -11,7 +11,9 @@ def load_test_data_json(path: Path) -> List[Tuple[Matrix, int, List[int]]]:
     with open(path, "r") as file:
         data_chunks = json.load(file)["data"]
         for data in data_chunks:
-            matrix.append(Matrix.from_lists(*data["matrix"], V=True, typ=BOOL))
+            l1, l2 = data["matrix"]
+            n = max(l1 + l2) + 1
+            matrix.append(Matrix.from_lists(l1, l2, V=True, typ=BOOL, nrows=n, ncols=n))
             source.append(data["source"])
             ans.append(data["ans"])
 
