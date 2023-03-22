@@ -36,7 +36,7 @@ def bfs(graph: Matrix, source: int) -> List[int]:
 
 def msbfs(graph: Matrix, sources: List[int]) -> List[List[Union[int, List[int]]]]:
     """
-    Multi-source matrix-based BFS implementation.
+    Matrix-like BFS of a directed graph by multiple sources
 
     Parameters
     ----------
