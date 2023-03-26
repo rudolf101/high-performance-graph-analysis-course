@@ -6,11 +6,11 @@ from project.triangles import vertex_triangle_count, cohen_algorithm, sandia_alg
 from tests.utils import load_test_data_json
 
 test_vertex_count_path = (
-        pathlib.Path(__file__).parent / "resources" / "test_triangles_vertex_count.json"
+    pathlib.Path(__file__).parent / "resources" / "test_triangles_vertex_count.json"
 )
 
 test_triangles_algorithms_path = (
-        pathlib.Path(__file__).parent / "resources" / "test_triangles_algorithms.json"
+    pathlib.Path(__file__).parent / "resources" / "test_triangles_algorithms.json"
 )
 
 
