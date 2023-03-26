@@ -49,7 +49,7 @@ def cohen_algorithm(graph: Matrix) -> int:
         number of triangles
     """
     _assert_adj_matrix_of_undirected_graph(graph)
-    return sum(graph.tril()(graph.triu(), cast=INT64, mask=graph).vals) // 2
+    return sum(graph.tril().mxm(graph.triu(), cast=INT64, mask=graph).vals) // 2
 
 
 def sandia_algorithm(graph: Matrix) -> int:
