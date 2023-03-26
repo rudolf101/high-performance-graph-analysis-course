@@ -13,4 +13,5 @@ test_triangles_path = (
 @pytest.mark.parametrize("test", load_test_data_json(test_triangles_path))
 def test_triangles(test):
     matrix, source, ans = test
-    return vertex_triangle_count(matrix) == ans
+    a = vertex_triangle_count(matrix)
+    assert a == ans
