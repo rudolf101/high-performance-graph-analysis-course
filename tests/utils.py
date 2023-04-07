@@ -20,3 +20,13 @@ def load_test_data_json(
             ans.append(data["ans"])
 
     return list(zip(matrix, source, ans))
+
+
+def matrix_with_weight_from_edge_list(
+    edge_list: List[Tuple[int, float, int]], directed=True
+) -> Matrix:
+    if not directed:
+        edge_list += [(j, w, i) for i, w, j in edge_list]
+    u, w, v = zip(*edge_list)
+    n = max(u + v) + 1
+    return Matrix.from_lists(u, v, w, nrows=n, ncols=n)
