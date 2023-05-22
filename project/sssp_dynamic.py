@@ -3,10 +3,9 @@ import heapq
 import itertools
 import math
 import networkx as nx
-from typing import Hashable
 
 
-def dijkstra_sssp(graph: nx.Graph, start: Hashable) -> dict[Hashable, float]:
+def dijkstra_sssp(graph: nx.Graph, start):
     """
     Finds the shortest paths from a single source vertex using the classical Dijkstra's algorithm.
 
@@ -45,7 +44,7 @@ class DynamicSSSP:
     Dynamic Dijkstra-like algorithm for computing single-source shortest paths.
     """
 
-    def __init__(self, graph: nx.DiGraph, start: Hashable):
+    def __init__(self, graph: nx.DiGraph, start):
         """
         Initializes the algorithm to run on the provided directed graph and start vertex.
 
@@ -59,7 +58,7 @@ class DynamicSSSP:
         self._distances = dijkstra_sssp(graph, start)
         self._modified_nodes = set()
 
-    def insert_edge(self, source: Hashable, target: Hashable, weight: float = 1):
+    def insert_edge(self, source, target, weight: float = 1):
         """
         Inserts or updates an edge in the graph.
 
@@ -72,7 +71,7 @@ class DynamicSSSP:
         self._distances.setdefault(source, math.inf)
         self._distances.setdefault(target, math.inf)
 
-    def delete_edge(self, source: Hashable, target: Hashable):
+    def delete_edge(self, source, target):
         """
         Deletes an edge from the graph.
 
@@ -82,7 +81,7 @@ class DynamicSSSP:
         self._graph.remove_edge(source, target)
         self._modified_nodes.add(target)
 
-    def query_distances(self) -> dict[Hashable, float]:
+    def query_distances(self):
         """
         Returns the distances from the start vertex to each vertex in the graph.
 
@@ -127,7 +126,7 @@ class DynamicSSSP:
                     if successor in queue._entry_map:
                         queue.remove(successor)
 
-    def _calculate_rhs(self, vertex: Hashable):
+    def _calculate_rhs(self, vertex):
         """
         Calculates the current right-hand-side (rhs) value for the provided vertex.
 
