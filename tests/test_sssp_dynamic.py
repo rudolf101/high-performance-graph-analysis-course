@@ -1,6 +1,5 @@
 import math
 import networkx as nx
-from pytest import approx
 
 from project.sssp_dynamic import dijkstra_sssp, DynamicSSSP
 
